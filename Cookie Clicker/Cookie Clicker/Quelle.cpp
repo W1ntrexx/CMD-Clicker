@@ -6,13 +6,44 @@
 
 
 int counter{ 0 };
+int time{4000};
+bool disableSleep{false};
 
 int aboutPage(){
 
 }
 
 int settingsScreen(){
-	
+	for(int i = 0; i < 1;){
+		std::cout << "What settings would you like to change?\n\n";
+		std::cout << "1. sleepValue(ms)\n";
+		std::cout << "2. disableSleep\n";
+		std::string input;
+		std::cin >> input;
+		if (input == "1" || input == "sleepValue(ms)" || input == "1. sleepValue(ms)"){  //if user chooses to change sleepValue
+			std::cout << "Current value: " << time << ".\n";
+			std::cout << "Change your value: ";
+			std::cin >> time;
+			i++;
+		}
+		else if (input == "2" || input == "disableSleep" || input == "2. disableSleep"){   //if user chooses to skip Sleep()
+			std::cout << "Current Value: " << disableSleep << ".";
+			std::cout << "Change Value(false/true|0/1): ";
+			std::cin >> disableSleep;
+			i++;
+		}
+		else{
+			std::cout << "Input failed!\n";
+			if(disableSleep){
+					Sleep(time);
+				}
+			system("cls");
+			std::cin.clear();
+			std::cin.ignore();
+
+		}
+	}
+	return 0;
 }
 
 int play (int choice) {
@@ -21,12 +52,16 @@ int play (int choice) {
 	if (File.is_open()) {
 				File >> counter;
 				File.close();
-				Sleep(100);
+				if(disableSleep){
+					Sleep(time);
+				}
 			}
 
 	}
 	std::cout << "Note: You can use every key on your keyboard to click except the 'Q' Key. Have fun!\n";
-	Sleep(4000);
+	if(disableSleep){
+		Sleep(time);
+	}
 	system("cls");
 	char key;
 
@@ -51,7 +86,9 @@ int play (int choice) {
    			if (file.is_open()) {
 				file << counter;
 				file.close();
-				Sleep(100);
+				if(disableSleep){
+					Sleep(time);
+				}
 			}
 			break;
 		}
@@ -86,7 +123,9 @@ int welcomeScreen() {
 		std::cin >> InputChoice;
 		if (!std::cin) { //checks if input is a number
 			std::cout << "This is not a number my friend :C\n";
-			Sleep(4000);
+			if(disableSleep){
+					Sleep(time);
+				}
 			InputChoice = 0;
 			std::cin.clear();
 			std::cin.ignore();
@@ -95,7 +134,9 @@ int welcomeScreen() {
 		}
 		else if (InputChoice > 4|| InputChoice < 1) { //checks if this choice even exists
 			std::cout << "This choice does not exist yet :o\n";
-			Sleep(4000);
+			if(disableSleep){
+					Sleep(time);
+				}
 			InputChoice = 0;
 			system("cls");
 		}
@@ -119,6 +160,8 @@ int welcomeScreen() {
 int main() {
 	for (int i = 0; i < 1;){
 	int choice{ welcomeScreen() };
+	std::cin.clear();
+	std::cin.ignore();
 		if (choice == 1 || choice == 2) {
 			play(choice);
 			i++;
