@@ -10,40 +10,69 @@ int time{4000};
 bool disableSleep{false};
 
 int aboutPage(){
-
+	system("cls");
+	std::cout << "Author: W1ntrexx\n";
+	std::cout << "Github Link: https://github.com/W1ntrexx/CMD-Cookie-Clicker\n\n\n\n";
+	std::cout << "Press Q to leave";
+	while (true) {
+			// Wait for a key press
+		char key;
+		key = _getch();
+		system("cls");
+		
+			
+		// Exit the loop if the 'q' key is pressed
+		if (key == 'Q') {
+			break;
+		}
+	
+	}
+return 0;
 }
 
 int settingsScreen(){
-	for(int i = 0; i < 1;){
+	while (true) {
+			// Wait for a key press
+		
 		std::cout << "What settings would you like to change?\n\n";
 		std::cout << "1. sleepValue(ms)\n";
-		std::cout << "2. disableSleep\n";
-		std::string input;
-		std::cin >> input;
-		if (input == "1" || input == "sleepValue(ms)" || input == "1. sleepValue(ms)"){  //if user chooses to change sleepValue
+		std::cout << "2. disableSleep\n\n\n";
+		std::cout << "Press Q to leave.\n";
+		char key;
+		key = _getch();
+		system("cls");
+		
+			// Count the pressed key
+			// Exit the loop if the 'q' key is pressed
+		if (key == 'Q') {
+			std::cout << '\n' << "Leaving!";
+			Sleep(time);
+			system("cls");
+			break;
+		}
+		else if (key == '1' ){  //if user chooses to change sleepValue
 			std::cout << "Current value: " << time << ".\n";
 			std::cout << "Change your value: ";
 			std::cin >> time;
-			i++;
+			system("cls");
 		}
-		else if (input == "2" || input == "disableSleep" || input == "2. disableSleep"){   //if user chooses to skip Sleep()
-			std::cout << "Current Value: " << disableSleep << ".";
+		else if (key == '2'){   //if user chooses to skip Sleep()
+			std::cout << "Current Value: " << disableSleep << ".\n";
 			std::cout << "Change Value(false/true|0/1): ";
 			std::cin >> disableSleep;
-			i++;
+			system("cls");
 		}
-		else{
+		else {
 			std::cout << "Input failed!\n";
 			if(disableSleep){
 					Sleep(time);
-				}
+			}
 			system("cls");
 			std::cin.clear();
 			std::cin.ignore();
-
 		}
+	
 	}
-	return 0;
 }
 
 int play (int choice) {
@@ -59,7 +88,7 @@ int play (int choice) {
 
 	}
 	std::cout << "Note: You can use every key on your keyboard to click except the 'Q' Key. Have fun!\n";
-	if(disableSleep){
+	if(!disableSleep){
 		Sleep(time);
 	}
 	system("cls");
@@ -171,6 +200,7 @@ int main() {
 			system("cls");
 		}
 		else{
+
 			aboutPage();
 			system("cls");
 		}
